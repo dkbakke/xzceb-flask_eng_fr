@@ -22,21 +22,25 @@ language_translator.set_service_url(url)
 def englishToFrench(englishText):
     '''Translate english text to french''' 
     try:
-        frenchText = language_translator.translate(
+        translation = language_translator.translate(
             englishText,
             model_id='en-fr').get_result()
     except ApiException as ex:
-        print "Method failed with status code " + str(ex.code) + ": " + ex.message
+        print ("Method failed with status code " + str(ex.code) + ": " + ex.message)
+    frenchText = translation["translations"][0]["translation"]
+    print ( frenchText )
     return frenchText
     
 
 def frenchToEnglish(frenchText):
     '''Translate french text to english''' 
     try:
-        englishText = language_translator.translate(
+        translation = language_translator.translate(
             frenchText,
             model_id='fr-en').get_result()
     except ApiException as ex:
-        print "Method failed with status code " + str(ex.code) + ": " + ex.message
+        print ( "Method failed with status code " + str(ex.code) + ": " + ex.message)
+    englishText = translation["translations"][0]["translation"]
+    print ( englishText )
     return englishText
     
